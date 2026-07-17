@@ -1,22 +1,37 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: UXMiley Portfolio CMS API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: hero
+    description: Hero section content
+  - name: about
+    description: About section content
+  - name: skills
+    description: Skills and services
+  - name: projects
+    description: Portfolio projects
+  - name: experiences
+    description: Career timeline
+  - name: testimonials
+    description: Testimonials
+  - name: articles
+    description: Blog articles
+  - name: contact
+    description: Contact information
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +39,526 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  # ── Hero ──────────────────────────────────────────────
+  /content/hero:
+    get:
+      operationId: getHero
+      tags: [hero]
+      summary: Get hero section content
+      responses:
+        "200":
+          description: Hero content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeroContent"
+    put:
+      operationId: updateHero
+      tags: [hero]
+      summary: Update hero section content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeroInput"
+      responses:
+        "200":
+          description: Updated hero content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeroContent"
+
+  # ── About ─────────────────────────────────────────────
+  /content/about:
+    get:
+      operationId: getAbout
+      tags: [about]
+      summary: Get about section content
+      responses:
+        "200":
+          description: About content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AboutContent"
+    put:
+      operationId: updateAbout
+      tags: [about]
+      summary: Update about section content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AboutInput"
+      responses:
+        "200":
+          description: Updated about content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AboutContent"
+
+  # ── Skills ────────────────────────────────────────────
+  /content/skills:
+    get:
+      operationId: listSkills
+      tags: [skills]
+      summary: List all skills
+      responses:
+        "200":
+          description: Skills list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Skill"
+    post:
+      operationId: createSkill
+      tags: [skills]
+      summary: Create a skill
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SkillInput"
+      responses:
+        "201":
+          description: Created skill
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skill"
+
+  /content/skills/{id}:
+    put:
+      operationId: updateSkill
+      tags: [skills]
+      summary: Update a skill
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SkillInput"
+      responses:
+        "200":
+          description: Updated skill
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skill"
+    delete:
+      operationId: deleteSkill
+      tags: [skills]
+      summary: Delete a skill
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Services ──────────────────────────────────────────
+  /content/services:
+    get:
+      operationId: listServices
+      tags: [skills]
+      summary: List all services
+      responses:
+        "200":
+          description: Services list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+    post:
+      operationId: createService
+      tags: [skills]
+      summary: Create a service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceInput"
+      responses:
+        "201":
+          description: Created service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+
+  /content/services/{id}:
+    put:
+      operationId: updateService
+      tags: [skills]
+      summary: Update a service
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceInput"
+      responses:
+        "200":
+          description: Updated service
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+    delete:
+      operationId: deleteService
+      tags: [skills]
+      summary: Delete a service
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Projects ──────────────────────────────────────────
+  /content/projects:
+    get:
+      operationId: listProjects
+      tags: [projects]
+      summary: List all projects
+      responses:
+        "200":
+          description: Projects list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+    post:
+      operationId: createProject
+      tags: [projects]
+      summary: Create a project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "201":
+          description: Created project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /content/projects/{id}:
+    put:
+      operationId: updateProject
+      tags: [projects]
+      summary: Update a project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "200":
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    delete:
+      operationId: deleteProject
+      tags: [projects]
+      summary: Delete a project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Experiences ───────────────────────────────────────
+  /content/experiences:
+    get:
+      operationId: listExperiences
+      tags: [experiences]
+      summary: List career experiences
+      responses:
+        "200":
+          description: Experiences list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Experience"
+    post:
+      operationId: createExperience
+      tags: [experiences]
+      summary: Create an experience entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExperienceInput"
+      responses:
+        "201":
+          description: Created experience
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experience"
+
+  /content/experiences/{id}:
+    put:
+      operationId: updateExperience
+      tags: [experiences]
+      summary: Update an experience entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExperienceInput"
+      responses:
+        "200":
+          description: Updated experience
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experience"
+    delete:
+      operationId: deleteExperience
+      tags: [experiences]
+      summary: Delete an experience entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Testimonials ──────────────────────────────────────
+  /content/testimonials:
+    get:
+      operationId: listTestimonials
+      tags: [testimonials]
+      summary: List testimonials
+      responses:
+        "200":
+          description: Testimonials list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Testimonial"
+    post:
+      operationId: createTestimonial
+      tags: [testimonials]
+      summary: Create a testimonial
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestimonialInput"
+      responses:
+        "201":
+          description: Created testimonial
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Testimonial"
+
+  /content/testimonials/{id}:
+    put:
+      operationId: updateTestimonial
+      tags: [testimonials]
+      summary: Update a testimonial
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestimonialInput"
+      responses:
+        "200":
+          description: Updated testimonial
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Testimonial"
+    delete:
+      operationId: deleteTestimonial
+      tags: [testimonials]
+      summary: Delete a testimonial
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Articles ──────────────────────────────────────────
+  /content/articles:
+    get:
+      operationId: listArticles
+      tags: [articles]
+      summary: List blog articles
+      responses:
+        "200":
+          description: Articles list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+    post:
+      operationId: createArticle
+      tags: [articles]
+      summary: Create an article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleInput"
+      responses:
+        "201":
+          description: Created article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+
+  /content/articles/{id}:
+    put:
+      operationId: updateArticle
+      tags: [articles]
+      summary: Update an article
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleInput"
+      responses:
+        "200":
+          description: Updated article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+    delete:
+      operationId: deleteArticle
+      tags: [articles]
+      summary: Delete an article
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  # ── Contact ───────────────────────────────────────────
+  /content/contact:
+    get:
+      operationId: getContact
+      tags: [contact]
+      summary: Get contact info
+      responses:
+        "200":
+          description: Contact info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactContent"
+    put:
+      operationId: updateContact
+      tags: [contact]
+      summary: Update contact info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "200":
+          description: Updated contact info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactContent"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +566,216 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    # ── Hero ────────────────────────────────────────────
+    HeroContent:
+      type: object
+      properties:
+        name:            { type: string }
+        role:            { type: string }
+        tagline:         { type: string }
+        location:        { type: string }
+        availabilityStatus: { type: string }
+        ctaLabel:        { type: string }
+        resumeUrl:       { type: string }
+      required: [name, role, tagline, location, availabilityStatus, ctaLabel, resumeUrl]
+
+    HeroInput:
+      type: object
+      properties:
+        name:            { type: string, minLength: 1 }
+        role:            { type: string, minLength: 1 }
+        tagline:         { type: string, minLength: 1 }
+        location:        { type: string }
+        availabilityStatus: { type: string }
+        ctaLabel:        { type: string }
+        resumeUrl:       { type: string }
+      required: [name, role, tagline, location, availabilityStatus, ctaLabel, resumeUrl]
+
+    # ── About ───────────────────────────────────────────
+    StatItem:
+      type: object
+      properties:
+        value: { type: string }
+        label: { type: string }
+      required: [value, label]
+
+    AboutContent:
+      type: object
+      properties:
+        bio1:  { type: string }
+        bio2:  { type: string }
+        stats:
+          type: array
+          items:
+            $ref: "#/components/schemas/StatItem"
+      required: [bio1, bio2, stats]
+
+    AboutInput:
+      type: object
+      properties:
+        bio1:  { type: string, minLength: 1 }
+        bio2:  { type: string }
+        stats:
+          type: array
+          items:
+            $ref: "#/components/schemas/StatItem"
+      required: [bio1, bio2, stats]
+
+    # ── Skill ───────────────────────────────────────────
+    Skill:
+      type: object
+      properties:
+        id:        { type: integer }
+        name:      { type: string }
+        category:  { type: string }
+        sortOrder: { type: integer }
+      required: [id, name, category, sortOrder]
+
+    SkillInput:
+      type: object
+      properties:
+        name:      { type: string, minLength: 1 }
+        category:  { type: string, minLength: 1 }
+        sortOrder: { type: integer }
+      required: [name, category, sortOrder]
+
+    # ── Service ─────────────────────────────────────────
+    Service:
+      type: object
+      properties:
+        id:        { type: integer }
+        title:     { type: string }
+        desc:      { type: string }
+        sortOrder: { type: integer }
+      required: [id, title, desc, sortOrder]
+
+    ServiceInput:
+      type: object
+      properties:
+        title:     { type: string, minLength: 1 }
+        desc:      { type: string, minLength: 1 }
+        sortOrder: { type: integer }
+      required: [title, desc, sortOrder]
+
+    # ── Project ─────────────────────────────────────────
+    Project:
+      type: object
+      properties:
+        id:        { type: integer }
+        title:     { type: string }
+        category:  { type: string }
+        tech:
+          type: array
+          items: { type: string }
+        image:     { type: string }
+        desc:      { type: string }
+        liveUrl:   { type: ["string", "null"] }
+        sortOrder: { type: integer }
+      required: [id, title, category, tech, image, desc, liveUrl, sortOrder]
+
+    ProjectInput:
+      type: object
+      properties:
+        title:     { type: string, minLength: 1 }
+        category:  { type: string, minLength: 1 }
+        tech:
+          type: array
+          items: { type: string }
+        image:     { type: string }
+        desc:      { type: string, minLength: 1 }
+        liveUrl:   { type: ["string", "null"] }
+        sortOrder: { type: integer }
+      required: [title, category, tech, image, desc, liveUrl, sortOrder]
+
+    # ── Experience ──────────────────────────────────────
+    Experience:
+      type: object
+      properties:
+        id:        { type: integer }
+        year:      { type: string }
+        role:      { type: string }
+        company:   { type: string }
+        desc:      { type: string }
+        sortOrder: { type: integer }
+      required: [id, year, role, company, desc, sortOrder]
+
+    ExperienceInput:
+      type: object
+      properties:
+        year:      { type: string, minLength: 1 }
+        role:      { type: string, minLength: 1 }
+        company:   { type: string, minLength: 1 }
+        desc:      { type: string, minLength: 1 }
+        sortOrder: { type: integer }
+      required: [year, role, company, desc, sortOrder]
+
+    # ── Testimonial ─────────────────────────────────────
+    Testimonial:
+      type: object
+      properties:
+        id:        { type: integer }
+        quote:     { type: string }
+        name:      { type: string }
+        title:     { type: string }
+        sortOrder: { type: integer }
+      required: [id, quote, name, title, sortOrder]
+
+    TestimonialInput:
+      type: object
+      properties:
+        quote:     { type: string, minLength: 1 }
+        name:      { type: string, minLength: 1 }
+        title:     { type: string, minLength: 1 }
+        sortOrder: { type: integer }
+      required: [quote, name, title, sortOrder]
+
+    # ── Article ─────────────────────────────────────────
+    Article:
+      type: object
+      properties:
+        id:       { type: integer }
+        title:    { type: string }
+        date:     { type: string }
+        category: { type: string }
+        readTime: { type: string }
+        link:     { type: string }
+        sortOrder: { type: integer }
+      required: [id, title, date, category, readTime, link, sortOrder]
+
+    ArticleInput:
+      type: object
+      properties:
+        title:    { type: string, minLength: 1 }
+        date:     { type: string, minLength: 1 }
+        category: { type: string, minLength: 1 }
+        readTime: { type: string }
+        link:     { type: string }
+        sortOrder: { type: integer }
+      required: [title, date, category, readTime, link, sortOrder]
+
+    # ── Contact ─────────────────────────────────────────
+    ContactContent:
+      type: object
+      properties:
+        email:     { type: string }
+        location:  { type: string }
+        timezone:  { type: string }
+        twitter:   { type: ["string", "null"] }
+        linkedin:  { type: ["string", "null"] }
+        github:    { type: ["string", "null"] }
+        dribbble:  { type: ["string", "null"] }
+      required: [email, location, timezone, twitter, linkedin, github, dribbble]
+
+    ContactInput:
+      type: object
+      properties:
+        email:     { type: string, minLength: 1 }
+        location:  { type: string }
+        timezone:  { type: string }
+        twitter:   { type: ["string", "null"] }
+        linkedin:  { type: ["string", "null"] }
+        github:    { type: ["string", "null"] }
+        dribbble:  { type: ["string", "null"] }
+      required: [email, location, timezone, twitter, linkedin, github, dribbble]

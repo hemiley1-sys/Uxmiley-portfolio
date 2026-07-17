@@ -1,0 +1,36 @@
+Design and develop a **sleek, modern, and futuristic (2030-inspired) personal portfolio website** for **UXMiley**, a highly skilled **UI/UX Designer** and **Web Developer**.
+
+The website should feature a premium user experience with clean layouts, smooth animations, responsive design, and fast performance. The overall aesthetic should be minimal, elegant, and technology-driven, highlighting creativity, professionalism, and innovation.
+
+### Key Requirements:
+
+* Modern 2030-inspired UI with glassmorphism, subtle gradients, and smooth micro-interactions.
+* Fully responsive across desktop, tablet, and mobile devices.
+* Fast-loading and optimized for performance and SEO.
+* Light and dark mode support with a theme toggle.
+* Engaging hero section with a strong personal introduction and call-to-action.
+* Professional About section showcasing experience, skills, and design philosophy.
+* Interactive Services section (UI/UX Design, Web Development, Product Design, WordPress Development, Branding, etc.).
+* Dynamic Portfolio/Projects section with filtering, hover effects, case studies, and live demo links.
+* Skills section with animated progress indicators or technology stack.
+* Testimonials section with a modern carousel.
+* Career timeline or experience section.
+* Blog/Insights section for articles and design tips.
+* Contact section with a functional contact form, social media links, and downloadable résumé.
+* Smooth page transitions, scroll-triggered animations, and premium hover effects.
+* Sticky navigation with active section highlighting.
+* Professional footer containing quick links and contact information.
+
+### Technology Stack:
+
+* Next.js or React
+* Tailwind CSS
+* Framer Motion (for animations)
+* TypeScript
+* Fully responsive and SEO-friendly architecture
+
+### Design Style:
+
+The portfolio should reflect the quality of a top-tier product designer and developer, comparable to portfolios from leading designers at companies like Apple, Google, and Airbnb. Every section should feel polished, immersive, and visually impressive while maintaining excellent usability and accessibility.
+
+The final result should present **UXMiley** as a world-class UI/UX Designer and Web Developer, leaving a strong first impression on recruiters, clients, and potential employers.

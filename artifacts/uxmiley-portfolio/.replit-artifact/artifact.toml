@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "UXMiley Portfolio"
+version = "1.0.0"
+id = "artifacts/uxmiley-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21066
+
+[services.development]
+run = "pnpm --filter @workspace/uxmiley-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/uxmiley-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/uxmiley-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21066"
+BASE_PATH = "/"
